@@ -6,9 +6,7 @@ import cors from "cors";
 
 dotenv.config();
 
-const uri =
-  (process.env.API_KEY as string) ||
-  "mongodb+srv://adamovd:YNWA1892-sg8@cluster0.tgv4sum.mongodb.net/CountriesDB";
+const uri = process.env.API_KEY as string;
 
 const app = express();
 app.use(express.json());
@@ -18,6 +16,7 @@ app.use(
       "http://127.0.0.1:3000",
       "http://localhost:3000",
       "http://127.0.0.1:3000",
+      "https://country-test-jade.vercel.app/",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
