@@ -7,7 +7,7 @@ type Country = {
   description: string;
   population: number;
   lat: number;
-  lon: number;
+  lng: number;
   imageUrl: string;
   recipes: Recipe[];
   playlistUrl: string;
@@ -18,7 +18,7 @@ interface CountryDoc extends mongoose.Document {
   description: string;
   population: number;
   lat: number;
-  lon: number;
+  lng: number;
   imageUrl: string;
   recipes: [];
   playlistUrl: string;
@@ -41,7 +41,7 @@ const countrySchema = new mongoose.Schema({
   lat: {
     type: Number,
   },
-  lon: {
+  lng: {
     type: Number,
   },
   imageUrl: {
@@ -59,6 +59,8 @@ const Country = mongoose.model<CountryDoc, CountryModelInterface>(
 );
 
 countrySchema.statics.build = (attr: Country) => {
+  console.log(attr);
+
   return new Country(attr);
 };
 

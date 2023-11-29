@@ -18,8 +18,9 @@ export const createCountry = async (req: Request, res: Response) => {
   const {
     name,
     description,
-    stats,
-    setFlagsFromString,
+    population,
+    lat,
+    lng,
     imageUrl,
     recipes,
     playlistUrl,
@@ -28,8 +29,9 @@ export const createCountry = async (req: Request, res: Response) => {
     const country = Country.create({
       name,
       description,
-      stats,
-      setFlagsFromString,
+      population,
+      lat,
+      lng,
       imageUrl,
       recipes,
       playlistUrl,

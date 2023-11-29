@@ -6,7 +6,7 @@ const createNewCountry = async ({
   description,
   population,
   lat,
-  lon,
+  lng,
   imageUrl,
   playlistUrl,
 }: Country) => {
@@ -17,7 +17,7 @@ const createNewCountry = async ({
       description: description,
       population: population,
       lat: lat,
-      lon: lon,
+      lng: lng,
       imageUrl: imageUrl,
       recipes: [],
       playlistUrl: playlistUrl,

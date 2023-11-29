@@ -6,7 +6,9 @@ import cors from "cors";
 
 dotenv.config();
 
-const uri = process.env.API_KEY as string;
+const uri =
+  (process.env.MONGODB_URI as string) ||
+  "mongodb+srv://adamovd:YNWA1892-sg8@cluster0.tgv4sum.mongodb.net/CountriesDB";
 
 const app = express();
 app.use(express.json());
