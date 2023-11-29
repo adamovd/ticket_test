@@ -1,22 +1,34 @@
-import { ticketRouter } from "./Routes/ticketRoutes";
+import { countryRouter } from "./Routes/countryRoutes";
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cors from "cors";
 
 dotenv.config();
 
-const uri = process.env.API_KEY as string;
+const uri =
+  (process.env.API_KEY as string) ||
+  "mongodb+srv://adamovd:YNWA1892-sg8@cluster0.tgv4sum.mongodb.net/CountriesDB";
 
 const app = express();
 app.use(express.json());
+app.use(
+  cors({
+    origin: [
+      "http://127.0.0.1:3000",
+      "http://localhost:3000",
+      "http://127.0.0.1:3000",
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 
 app.use((req: Request, res: Response, next) => {
   console.log(`Processing ${req.method} request to ${req.path}`);
   next();
 });
-console.log(uri);
 
-app.use("/api/v1/tickets", ticketRouter);
+app.use("/api/v1/countries", countryRouter);
 
 const port = process.env.PORT || 5127;
 
