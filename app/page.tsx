@@ -4,53 +4,63 @@ import { Country } from "./Models/Country";
 import createNewCountry from "./Services/countryServices";
 import { UploadButton } from "./utils/uploadthing";
 import axios from "axios";
+import { ChangeEvent, useState } from "react";
+import { countryList } from "./utils/countryList";
 
-const resolver: Resolver<Country> = async (values) => {
-  return {
-    values: values.name ? values : {},
-    errors: !values.name
-      ? {
-          name: {
-            type: "required",
-            message: "This is required.",
-          },
-        }
-      : {},
-  };
-};
+// const resolver: Resolver<Country> = async (values) => {
+//   return {
+//     values: values.name ? values : {},
+//     errors: !values.name
+//       ? {
+//           name: {
+//             type: "required",
+//             message: "This is required.",
+//           },
+//         }
+//       : {},
+//   };
+// };
 
 // eslint-disable-next-line @next/next/no-async-client-component
 export default function CountryForm() {
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const defaultOption = "Select a country";
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm<Country>({ resolver });
+  } = useForm<Country>();
   const onSubmit = handleSubmit(async (data) => {
-    const getInfo = async () => {
-      try {
-        const response = await axios.get(
-          `https://restcountries.com/v3.1/name/${data.name}?fields=latlng,population`
-        );
-        return response.data[0]; // Assuming data is an array and taking the first result
-      } catch (error) {
-        console.error("Error fetching country data:", error);
-        return null;
-      }
-    };
-
-    const countryInfo = await getInfo();
-
-    if (countryInfo) {
-      setValue("population", countryInfo.population);
-      setValue("lat", countryInfo.latlng[0]);
-      setValue("lon", countryInfo.latlng[1]);
-    }
-
     console.log(data);
     await createNewCountry(data);
   });
+
+  const handleCountryChange = async (e: ChangeEvent<HTMLSelectElement>) => {
+    const selectedCountryValue = e.target.value;
+    console.log(selectedCountry);
+
+    setSelectedCountry(selectedCountryValue);
+    setValue("name", selectedCountryValue);
+    const country = countryList.find(
+      (country) => country.name === selectedCountryValue
+    );
+    console.log(country?.code);
+
+    try {
+      const response = await axios.get(
+        `https://restcountries.com/v3.1/alpha/${country?.code}?fields=latlng,population`
+      );
+
+      const countryInfo = response.data;
+
+      setValue("population", countryInfo.population);
+      setValue("lat", countryInfo.latlng[0]);
+      setValue("lng", countryInfo.latlng[1]);
+    } catch (error) {
+      console.error("Error fetching country data:", error);
+    }
+  };
 
   return (
     <form onSubmit={onSubmit}>
@@ -58,23 +68,25 @@ export default function CountryForm() {
         <div className="border-b border-gray-900/10 pb-12">
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-4">
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Country
-              </label>
-              <div className="mt-2">
-                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                  <input
-                    {...register("name")}
-                    placeholder="Name of the country"
-                    id="name"
-                    name="name"
-                    className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                  />
-                  {errors?.name && <p>{errors.name.message}</p>}
-                </div>
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Select a country
+                </label>
+                <select
+                  value={selectedCountry}
+                  onChange={handleCountryChange}
+                  id="name"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                >
+                  {countryList.map((country, index) => (
+                    <option key={index} value={country.name}>
+                      {country.name}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
 
