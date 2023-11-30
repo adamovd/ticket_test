@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npx prisma generate next build",
+    "build": "next build",
     "start": "nodemon -I --exec node --experimental-specifier-resolution=node  --loader ts-node/esm app/api/router.ts",
     "lint": "next lint",
     "seedDb": "nodemon -I --exec node --experimental-specifier-resolution=node  --loader ts-node/esm app/api/SeedDb/seedDb.ts"
