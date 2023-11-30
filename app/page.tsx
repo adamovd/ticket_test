@@ -4,7 +4,7 @@ import { getAllCountries } from "./Services/countryServices";
 import { Country } from "./Models/Country";
 
 const Home = () => {
-  const [countries, setCountries] = useState<Country[]>([]);
+  const [countries, setCountries] = useState([]);
   useEffect(() => {
     getAllCountries().then((response) => {
       console.log(response);
