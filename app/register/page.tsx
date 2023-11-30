@@ -18,7 +18,7 @@ export default function CountryForm() {
     setValue,
   } = useForm<Country>();
   const onSubmit = handleSubmit(async (data) => {
-    fetch("www.eattheworld.se/api/register", {
+    fetch("https://www.eattheworld.se/api/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...data }),
