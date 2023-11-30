@@ -18,12 +18,12 @@ export default function CountryForm() {
     setValue,
   } = useForm<Country>();
   const onSubmit = handleSubmit(async (data) => {
-    fetch("https://www.eattheworld.se/api/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...data }),
-    });
-    // await createNewCountry(data);
+    // fetch("https://www.eattheworld.se/api/register", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ ...data }),
+    // });
+    await createNewCountry(data);
   });
 
   const handleCountryChange = async (e: ChangeEvent<HTMLSelectElement>) => {

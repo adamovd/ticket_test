@@ -11,7 +11,7 @@ const createNewCountry = async ({
   playlistUrl,
 }: Country) => {
   let response = await axios.post<Country>(
-    "http://localhost:5127/api/v1/countries",
+    "https://www.eattheworld.se/api/register",
     {
       name: name,
       description: description,
