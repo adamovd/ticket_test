@@ -24,6 +24,8 @@ app.use(
   })
 );
 
+app.use(express.urlencoded({ extended: true }));
+
 app.use((req: Request, res: Response, next) => {
   console.log(`Processing ${req.method} request to ${req.path}`);
   next();
