@@ -30,3 +30,14 @@ export const POST = async (request: NextRequest) => {
 
   return NextResponse.json({ message: "Country created succesfully", user });
 };
+
+export const GET = async () => {
+  try {
+    const countries = await prisma.country.findMany();
+    return NextResponse.json(countries.reverse());
+  } catch {
+    return NextResponse.json("error", {
+      status: 500,
+    });
+  }
+};

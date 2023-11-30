@@ -1,7 +1,7 @@
 "use client";
 import { useForm, Resolver } from "react-hook-form";
 import { Country } from "../../Models/Country";
-import createNewCountry from "../../Services/countryServices";
+import { createNewCountry } from "../../Services/countryServices";
 import { UploadButton } from "../../utils/uploadthing";
 import axios from "axios";
 import { ChangeEvent, useState } from "react";
@@ -18,11 +18,6 @@ export default function CountryForm() {
     setValue,
   } = useForm<Country>();
   const onSubmit = handleSubmit(async (data) => {
-    // fetch("https://www.eattheworld.se/api/register", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ ...data }),
-    // });
     createNewCountry(data);
   });
 
