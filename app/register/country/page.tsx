@@ -23,7 +23,7 @@ export default function CountryForm() {
     //   headers: { "Content-Type": "application/json" },
     //   body: JSON.stringify({ ...data }),
     // });
-    await createNewCountry(data);
+    createNewCountry(data);
   });
 
   const handleCountryChange = async (e: ChangeEvent<HTMLSelectElement>) => {
