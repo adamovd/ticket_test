@@ -1,11 +1,11 @@
 "use client";
 import { useForm, Resolver } from "react-hook-form";
-import { Country } from "../Models/Country";
-import createNewCountry from "../Services/countryServices";
-import { UploadButton } from "../utils/uploadthing";
+import { Country } from "../../Models/Country";
+import createNewCountry from "../../Services/countryServices";
+import { UploadButton } from "../../utils/uploadthing";
 import axios from "axios";
 import { ChangeEvent, useState } from "react";
-import { countryList } from "../utils/countryList";
+import { countryList } from "../../utils/countryList";
 
 // eslint-disable-next-line @next/next/no-async-client-component
 export default function CountryForm() {
@@ -23,7 +23,7 @@ export default function CountryForm() {
     //   headers: { "Content-Type": "application/json" },
     //   body: JSON.stringify({ ...data }),
     // });
-    await createNewCountry(data);
+    await createNewCountry({ ...data });
   });
 
   const handleCountryChange = async (e: ChangeEvent<HTMLSelectElement>) => {
