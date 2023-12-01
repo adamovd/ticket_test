@@ -41,3 +41,26 @@ export const GET = async () => {
     });
   }
 };
+
+export async function DELETE(req: Request) {
+  const query = new URL(req.url).searchParams;
+  const id = query.get("id") as string;
+  try {
+    const deletedPost = await prisma.country.delete({
+      where: {
+        id,
+      },
+    });
+
+    return NextResponse.json(deletedPost);
+  } catch {
+    return NextResponse.json(
+      {
+        error: "Failed to remove country",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+}

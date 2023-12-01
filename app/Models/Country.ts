@@ -3,6 +3,9 @@ import mongoose from "mongoose";
 import { Recipe } from "./Recipe";
 
 type Country = {
+  _id: string;
+  createdAt: Date;
+  updatedAt: Date;
   name: string;
   description: string;
   population: number;

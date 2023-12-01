@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { getAllCountries } from "../Services/countryServices";
 import { Country } from "../Models/Country";
 import Image from "next/image";
+import { format } from "date-fns";
 
 const Countries = () => {
   const [countries, setCountries] = useState<Country[]>([]);
@@ -26,23 +27,27 @@ const Countries = () => {
                   src={country.imageUrl}
                   alt={country.name}
                   className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                  width={300}
+                  width={400}
                   height={400}
                 />
               </div>
-              <div className="mt-4 flex justify-between">
+              <div className="mt-4 flex-col justify-between">
                 <div>
-                  <h3 className="text-sm text-gray-700">
+                  <h2 className="text-gray-700">
                     <span aria-hidden="true" className="absolute inset-0" />
                     {country.name}
-                  </h3>
+                  </h2>
                   <p className="mt-1 text-sm text-gray-500">
                     {country.description}
                   </p>
                 </div>
-                <p className="text-sm font-medium text-gray-900">
-                  Population: {country.population}
-                </p>
+                <small className="text-sm font-medium text-gray-900">
+                  Created:{" "}
+                  {format(
+                    new Date(country.createdAt),
+                    "dd/MM/yyyy - HH:mm"
+                  ).toString()}
+                </small>
               </div>
             </div>
           ))}

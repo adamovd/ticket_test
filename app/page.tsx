@@ -3,7 +3,7 @@ import React from "react";
 
 const Home = () => {
   return (
-    <div className="relative isolate px-6 pt-14 lg:px-8">
+    <div className="relative isolate px-6  lg:px-8">
       <div
         className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
         aria-hidden="true"
@@ -31,9 +31,9 @@ const Home = () => {
             Food to heal the soul
           </h1>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-            lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
-            fugiat aliqua.
+            Experience global cuisine at Eat the World! Explore recipes from
+            diverse countries, savoring flavors and cultures without leaving
+            your kitchen.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Link
