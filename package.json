@@ -1,5 +1,4 @@
 {
-  "type": "module",
   "name": "ticket-app",
   "version": "0.1.0",
   "private": true,
@@ -16,6 +15,7 @@
     "@heroicons/react": "^2.0.18",
     "@hookform/resolvers": "^3.3.2",
     "@prisma/client": "^5.6.0",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.7",
     "@types/styled-components": "^5.1.32",
     "@uploadthing/react": "^6.0.2",
