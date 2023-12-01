@@ -1,7 +1,12 @@
 import { Country } from "../Models/Country";
 
+const url =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:3000/api/countries"
+    : "https://www.eattheworld.se/api/countries";
+
 export const createNewCountry = async (data: Country) => {
-  fetch("https://www.eattheworld.se/api/countries", {
+  fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ ...data }),
@@ -9,10 +14,9 @@ export const createNewCountry = async (data: Country) => {
 };
 
 export const getAllCountries = async () => {
-  const response = await fetch("https://www.eattheworld.se/api/countries", {
+  const response = await fetch(url, {
     next: { revalidate: 10 },
   });
-  console.log(response);
 
-  return response;
+  return response.json();
 };
